@@ -16,11 +16,7 @@ module.exports = function(RED) {
 		substitutions: msg.substitutions,
                 templateId: msg.templateId
             };
-            sgMail.send(data, function(err) {
-                if (err) {
-                    node.error(err.toString(), msg);
-                }
-            });
+            sgMail.send(data).catch(error => node.error(err.toString(), msg));
             this.status({});            
         });
     }
